@@ -29,46 +29,47 @@ function App() {
 
   return (
     <Layout>
-      <h1 className='text-4xl text-center'>Wallet Guard</h1>
+      <div className="max-w-2xl mx-auto py-8 px-4">
 
+        <h1 className='text-4xl text-center'>Wallet Guard</h1>
 
-      <section className='my-5'>
-        <h2 className='text-xl font-bold mb-2'>Estadistica</h2>
-        <div className='md:flex md:items-center md:gap-2'>
-          <TarjetaInformacion titulo='Total gastado' texto={'$' + totalGastado.toString()}>
-            {
-              totalGastado > 500 && (
-                <p className='text-xs text-red-500'>
-                  ⚠️ Cuidado, estás gastando mucho
-                </p>
+        <section className='my-5'>
+          <h2 className='text-xl font-bold mb-2'>Estadistica</h2>
+          <div className='md:flex md:items-center md:gap-2'>
+            <TarjetaInformacion titulo='Total gastado' texto={'$' + totalGastado.toString()}>
+              {
+                totalGastado > 500 && (
+                  <p className='text-xs text-red-500'>
+                    ⚠️ Cuidado, estás gastando mucho
+                  </p>
+                )
+              }
+            </TarjetaInformacion>
+
+          </div>
+        </section>
+
+        <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 my-5'>
+          {
+            gastos.map((gasto) => {
+              return (
+                <TarjetaGasto
+                  key={gasto.id}
+                  concepto={gasto.concepto}
+                  monto={gasto.monto}
+                  fecha={gasto.fecha}
+                />
+
               )
-            }
-          </TarjetaInformacion>
+            })
+          }
 
-        </div>
-      </section>
-
-      <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 my-5'>
-        {
-          gastos.map((gasto) => {
-            return (
-              <TarjetaGasto
-                key={gasto.id}
-                concepto={gasto.concepto}
-                monto={gasto.monto}
-                fecha={gasto.fecha}
-              />
-
-            )
-          })
-        }
-
-      </section>
-      <section>
-        <h3 className='text-xl font-bold mb-2 text-center'>Ingreso de gasto</h3>
-        <FormularioGasto onAgregar={guardarGasto} />
-
-      </section>
+        </section>
+        <section>
+          <h3 className='text-xl font-bold mb-2 text-center'>Ingreso de gasto</h3>
+          <FormularioGasto onAgregar={guardarGasto} />
+        </section>
+      </div>
     </Layout>
   )
 }
